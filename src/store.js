@@ -20,22 +20,28 @@ export default new Vuex.Store({
   },
   mutations: {
     SET_LOADING(state, flag) {
+      console.log("SET_LOADING");
       state.loading = flag;
     },
     SET_TODOS(state, todos) {
+      console.log("SET_TODOS");
       state.todos = todos;
     },
     SET_NEW_TODO(state, todo) {
+      console.log("SET_NEW_TODO");
       state.newTodo = todo;
     },
     REMOVE_TODO(state, todo) {
+      console.log("REMOVE_TODO");
       var todos = state.todos;
       todos.splice(todos.indexOf(todo), 1);
     },
     ADD_TODO(state, todoObject) {
+      console.log("ADD_TODO");
       state.todos.push(todoObject);
     },
     CLEAR_NEW_TODO(state) {
+      console.log("CLEAR_NEW_TODO");
       state.newTodo = "";
     }
   },
@@ -65,12 +71,12 @@ export default new Vuex.Store({
         completed: false,
         id: randomId()
       };
-      axios.post("/todos", todo).then(() => {
+      axios.post("http://localhost:3000/todos", todo).then(() => {
         commit("ADD_TODO", todo);
       });
     },
     removeTodo({ commit }, todo) {
-      axios.delete(`/todos/${todo.id}`).then(() => {
+      axios.delete(`http://localhost:3000/todos/${todo.id}`).then(() => {
         console.log("removed todo", todo.id, "from the server");
         commit("REMOVE_TODO", todo);
       });

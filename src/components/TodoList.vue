@@ -1,6 +1,16 @@
 <template>
   <div class="hello">
     <h1>{{ msg }}</h1>
+    <header class="header">
+      <h1>todos</h1>
+      <input class="new-todo"
+        autofocus autocomplete="off"
+        placeholder="What needs to be done?"
+        :value="newTodo"
+        @change="setNewTodo"
+        @keyup.enter="addTodo"
+        >
+    </header>
     <section class="main" v-show="todos.length" v-cloak>
       <ul class="todo-list">
         <li
@@ -12,7 +22,7 @@
           <div class="view">
             <input class="toggle" type="checkbox" v-model="todo.completed" />
             <label>{{ todo.title }}</label>
-            <button class="destroy" @click="removeTodo(todo)"></button>
+            <button class="destroy" @click="removeTodo(todo)">Delete</button>
           </div>
         </li>
       </ul>
